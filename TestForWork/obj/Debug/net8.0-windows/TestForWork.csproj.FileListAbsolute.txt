@@ -1,0 +1,17 @@
+C:\Users\nurla\RiderProjects\ss\TestForWork\TestForWork\bin\Debug\net8.0-windows\TestForWork.exe
+C:\Users\nurla\RiderProjects\ss\TestForWork\TestForWork\bin\Debug\net8.0-windows\TestForWork.deps.json
+C:\Users\nurla\RiderProjects\ss\TestForWork\TestForWork\bin\Debug\net8.0-windows\TestForWork.runtimeconfig.json
+C:\Users\nurla\RiderProjects\ss\TestForWork\TestForWork\bin\Debug\net8.0-windows\TestForWork.dll
+C:\Users\nurla\RiderProjects\ss\TestForWork\TestForWork\bin\Debug\net8.0-windows\TestForWork.pdb
+C:\Users\nurla\RiderProjects\ss\TestForWork\TestForWork\obj\Debug\net8.0-windows\TestForWork.csproj.GenerateResource.cache
+C:\Users\nurla\RiderProjects\ss\TestForWork\TestForWork\obj\Debug\net8.0-windows\TestForWork.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\nurla\RiderProjects\ss\TestForWork\TestForWork\obj\Debug\net8.0-windows\TestForWork.AssemblyInfoInputs.cache
+C:\Users\nurla\RiderProjects\ss\TestForWork\TestForWork\obj\Debug\net8.0-windows\TestForWork.AssemblyInfo.cs
+C:\Users\nurla\RiderProjects\ss\TestForWork\TestForWork\obj\Debug\net8.0-windows\TestForWork.csproj.CoreCompileInputs.cache
+C:\Users\nurla\RiderProjects\ss\TestForWork\TestForWork\obj\Debug\net8.0-windows\TestForWork.dll
+C:\Users\nurla\RiderProjects\ss\TestForWork\TestForWork\obj\Debug\net8.0-windows\refint\TestForWork.dll
+C:\Users\nurla\RiderProjects\ss\TestForWork\TestForWork\obj\Debug\net8.0-windows\TestForWork.pdb
+C:\Users\nurla\RiderProjects\ss\TestForWork\TestForWork\obj\Debug\net8.0-windows\TestForWork.genruntimeconfig.cache
+C:\Users\nurla\RiderProjects\ss\TestForWork\TestForWork\obj\Debug\net8.0-windows\ref\TestForWork.dll
+C:\Users\nurla\RiderProjects\ss\TestForWork\TestForWork\bin\Debug\net8.0-windows\TestForWork.dll.config
+C:\Users\nurla\RiderProjects\ss\TestForWork\TestForWork\obj\Debug\net8.0-windows\TestForWork.View.MainForm.resources
