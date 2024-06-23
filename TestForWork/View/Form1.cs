@@ -88,7 +88,7 @@ namespace TestForWork.View
                 BackColor = Color.LightGray,
                 Size = new Size(400, 300),
                 Location = new Point(200, 10),
-                Visible = false // Изначально панель невидима
+               
             };
 
             // Пример добавления элементов на панель
@@ -150,8 +150,13 @@ namespace TestForWork.View
             {
                 CreateConditionsPanel();
             }
-
-            conditionsPanel.Visible = !conditionsPanel.Visible;
+            else
+            {
+                Controls.Remove(conditionsPanel);
+                conditionsPanel.Dispose(); 
+                conditionsPanel = null;  
+            }
+         
         }
         private void ApplyButton_Click(object sender, EventArgs e)
         {
