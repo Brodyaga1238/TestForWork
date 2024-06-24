@@ -218,13 +218,15 @@ namespace TestForWork.View
         //Событие статистики
         private void stat_employees_Click(object sender, EventArgs e)
         {
-            
-            StatEmployeesClick?.Invoke(sender,e);
             ShowConditionsPanel();
+            StatEmployeesClick?.Invoke(sender,e);
+           
         }
         //Событие изменеия периода
         private void DataRangeChanged(object sender, EventArgs e)
-        {   
+        {
+            StartDate = _datafirst.Value;
+            EndDate =_datasecond.Value ;
             DateRangeChanged?.Invoke(sender, e);    
         }
     }

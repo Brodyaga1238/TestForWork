@@ -28,18 +28,19 @@ namespace TestForWork.Presenter
 
         public void DateRangeChanged(object sender, EventArgs e)
         {
-             
+            DateTime startdate;
+            DateTime enddate;
             if (_view.StartDate > _view.EndDate)
             {
-                DateTime startDate = _view.EndDate;
-                DateTime endDate = _view.StartDate;
+                 startdate = _view.EndDate;
+                 enddate = _view.StartDate;
             }
             else
             {
-                DateTime startDate = _view.StartDate;
-                DateTime endDate = _view.EndDate;
-            }   
-            MessageBox.Show($"Список сотрудников нажат", "Информация");
+                startdate = _view.StartDate;
+                enddate = _view.EndDate;
+            }
+            
         }
     }
 }
