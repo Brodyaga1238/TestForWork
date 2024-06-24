@@ -204,9 +204,9 @@ namespace TestForWork.View
             }
          
         }
+        //Нажатие отправки запроса 
         private void ApplyButton_Click(object sender, EventArgs e)
         {
-            // Логика обработки нажатия кнопки "Применить"
             MessageBox.Show("Условия применены.", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         
