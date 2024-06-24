@@ -14,7 +14,6 @@ namespace TestForWork.Model.DataBase
             MasterConnectionString = ConfigurationManager.ConnectionStrings["MasterDB"].ConnectionString;
             EmployeeConnectionString = ConfigurationManager.ConnectionStrings["EmployeeDB"].ConnectionString;
             InitializeAsync();
-
         }
         //Запуск инициализации на создание бд и таблиц
          public async Task InitializeAsync()
@@ -32,14 +31,17 @@ namespace TestForWork.Model.DataBase
             {
                 try
                 {
-                    await connection.OpenAsync();
-                    SqlCommand command = new SqlCommand();
-                    command.CommandText =
-                        "IF NOT EXISTS (SELECT name FROM sys.databases WHERE name = @namebase) CREATE DATABASE [" +
-                        namebase + "]";
-                    command.Parameters.AddWithValue("@namebase", namebase);
-                    command.Connection = connection; 
-                    await command.ExecuteNonQueryAsync();
+                    using (SqlCommand command = new SqlCommand())
+                    {
+                        await connection.OpenAsync();
+                        command.CommandText =
+                            "IF NOT EXISTS (SELECT name FROM sys.databases WHERE name = @namebase) CREATE DATABASE [" +
+                            namebase + "]";
+                        command.Parameters.AddWithValue("@namebase", namebase);
+                        command.Connection = connection; 
+                        await command.ExecuteNonQueryAsync();
+                    }
+                    
                 }
                 catch (SqlException ex)
                 {
@@ -48,13 +50,6 @@ namespace TestForWork.Model.DataBase
                 catch (Exception ex)
                 {
                     Console.WriteLine("General Exception: " + ex.Message);
-                }
-                finally
-                {
-                    if (connection.State == System.Data.ConnectionState.Open)
-                    {
-                        await connection.CloseAsync();
-                    }
                 }
             }
             
