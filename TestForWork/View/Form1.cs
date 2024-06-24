@@ -1,18 +1,30 @@
 using Microsoft.VisualBasic;
+using TestForWork.Presenter;
 
 namespace TestForWork.View
 {
     public partial class MainForm : Form, IMainFormView
     {
+        private DateTimePicker _datafirst;
+        private DateTimePicker _datasecond;
+
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
+        
+        
         public event EventHandler ListEmployeesClicked;
 
         public event EventHandler StatEmployeesClick;
+        public event EventHandler DateRangeChanged;
         
-        private Panel conditionsPanel;
+        private Panel _conditionsPanel;
+        
+        private MainFormPresenter _presenter;
         //Инициализация
         public MainForm()
         {
             InitializeComponent();
+            _presenter = new MainFormPresenter(this);
         }
         //Запуск создания всех элементов п.и.
         private void InitializeComponent()
@@ -74,7 +86,7 @@ namespace TestForWork.View
         // Создание панели с условиями
         private void CreateConditionsPanel()
         {
-            conditionsPanel = new Panel
+            _conditionsPanel = new Panel
             {
                 BackColor = Color.LightGray,
                 Size = new Size(400, 300),
@@ -90,7 +102,7 @@ namespace TestForWork.View
                 Location = new Point(130, 10),
                 Size = new Size(130, 20)
             };
-            conditionsPanel.Controls.Add(conditionslabel);
+            _conditionsPanel.Controls.Add(conditionslabel);
             //  добавления лейбла статуса на панель
             Label statuslabel = new Label
             {
@@ -98,7 +110,7 @@ namespace TestForWork.View
                 Location = new Point(10, 30),
                 Size = new Size(170, 20)
             };
-            conditionsPanel.Controls.Add(statuslabel);
+            _conditionsPanel.Controls.Add(statuslabel);
             //  добавления рабочий статуса статуса на панель
             Label worklabel = new Label
             {
@@ -106,7 +118,7 @@ namespace TestForWork.View
                 Location = new Point(10, 60),
                 Size = new Size(170, 20)
             };
-            conditionsPanel.Controls.Add(worklabel);
+            _conditionsPanel.Controls.Add(worklabel);
             //  добавления лейбла статуса на панель
             Label datastartlabel = new Label
             {
@@ -114,7 +126,7 @@ namespace TestForWork.View
                 Location = new Point(10, 90),
                 Size = new Size(170, 20)
             };
-            conditionsPanel.Controls.Add(datastartlabel);
+            _conditionsPanel.Controls.Add(datastartlabel);
             //  добавления лейбла статуса на панель
             Label dataendlabel = new Label
             {
@@ -122,7 +134,7 @@ namespace TestForWork.View
                 Location = new Point(10, 120),
                 Size = new Size(170, 20)
             };
-            conditionsPanel.Controls.Add(dataendlabel);
+            _conditionsPanel.Controls.Add(dataendlabel);
             //  добавления комбобокса статуса на панель
             ComboBox statusComboBox = new ComboBox
             {
@@ -131,7 +143,7 @@ namespace TestForWork.View
                 Size = new Size(200, 20),
                 DropDownStyle = ComboBoxStyle.DropDownList
             };
-            conditionsPanel.Controls.Add(statusComboBox);
+            _conditionsPanel.Controls.Add(statusComboBox);
             //  добавления комбобокса статуса работника на панель
             ComboBox workStatus = new ComboBox
             {
@@ -140,28 +152,29 @@ namespace TestForWork.View
                 Size = new Size(200, 20),
                 DropDownStyle = ComboBoxStyle.DropDownList
             };
-            conditionsPanel.Controls.Add(workStatus);
+            _conditionsPanel.Controls.Add(workStatus);
             //  добавления дататаймера начала на панель
-            DateTimePicker datafirst = new DateTimePicker 
+             _datafirst = new DateTimePicker 
             {
                 BackColor = Color.Gainsboro,
                 Location = new Point(180, 90),
                 Size = new Size(200, 20),
                 Format = DateTimePickerFormat.Short,
-                MaxDate = DateAndTime.Today
+                MaxDate = DateTime.Today
             };
-            conditionsPanel.Controls.Add(datafirst);
+            _datafirst.ValueChanged += DataRangeChanged;
+            _conditionsPanel.Controls.Add(_datafirst);
             //  добавления дататаймера начала на панель
-            DateTimePicker datasecond = new DateTimePicker 
+             _datasecond = new DateTimePicker 
             {
                 BackColor = Color.Gainsboro,
                 Location = new Point(180, 120),
                 Size = new Size(200, 20),
                 Format = DateTimePickerFormat.Short,
-                MaxDate = DateAndTime.Today
-                
+                MaxDate = DateTime.Today
             };
-            conditionsPanel.Controls.Add(datasecond);
+            _datasecond.ValueChanged += DataRangeChanged;
+            _conditionsPanel.Controls.Add(_datasecond);
             //  добавления кнопки на панель
             Button applyButton = new Button
             {
@@ -171,23 +184,23 @@ namespace TestForWork.View
                 BackColor = Color.Gainsboro
             };
             applyButton.Click += ApplyButton_Click;
-            conditionsPanel.Controls.Add(applyButton);
+            _conditionsPanel.Controls.Add(applyButton);
             
-            Controls.Add(conditionsPanel);
+            Controls.Add(_conditionsPanel);
             
         }
         //Активация панели
         private void ShowConditionsPanel()
         {
-            if (conditionsPanel == null)
+            if (_conditionsPanel == null)
             {
                 CreateConditionsPanel();
             }
             else
             {
-                Controls.Remove(conditionsPanel);
-                conditionsPanel.Dispose(); 
-                conditionsPanel = null;  
+                Controls.Remove(_conditionsPanel);
+                _conditionsPanel.Dispose(); 
+                _conditionsPanel = null;  
             }
          
         }
@@ -205,9 +218,14 @@ namespace TestForWork.View
         //Событие статистики
         private void stat_employees_Click(object sender, EventArgs e)
         {
-            ShowConditionsPanel();
+            
             StatEmployeesClick?.Invoke(sender,e);
+            ShowConditionsPanel();
         }
-        
+        //Событие изменеия периода
+        private void DataRangeChanged(object sender, EventArgs e)
+        {   
+            DateRangeChanged?.Invoke(sender, e);    
+        }
     }
 }
