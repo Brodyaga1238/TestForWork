@@ -11,7 +11,7 @@ namespace TestForWork.Model.DataBase
         private string EmployeeConnectionString { get; set; }
 
 
-        public DatabaseCreator()
+        public  DatabaseCreator()
         {
             MasterConnectionString = ConfigurationManager.ConnectionStrings["MasterDB"].ConnectionString;
             EmployeeConnectionString = ConfigurationManager.ConnectionStrings["EmployeeDB"].ConnectionString;
