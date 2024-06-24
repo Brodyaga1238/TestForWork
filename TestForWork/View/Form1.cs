@@ -1,3 +1,5 @@
+using Microsoft.VisualBasic;
+
 namespace TestForWork.View
 {
     public partial class MainForm : Form, IMainFormView
@@ -30,18 +32,7 @@ namespace TestForWork.View
           
             ResumeLayout(false);
         }
-
-        private void CreateButtons(string text,Size size, Point location)
-        {
-            Button button = new Button()
-            {
-                BackColor = Color.Gainsboro,
-                Location = location,
-                Text = text,
-                Size = size
-            };
-            Controls.Add(button);
-        }
+        
         //Добавление кнопок
         private void ButtonsAdd()
         {
@@ -91,7 +82,8 @@ namespace TestForWork.View
                
             };
 
-            // Пример добавления элементов на панель
+            //  добавления элементов на панель
+            //  добавления лейбла условия на панель
             Label conditionslabel = new Label
             {
                 Text = "Выберите условия",
@@ -99,6 +91,7 @@ namespace TestForWork.View
                 Size = new Size(130, 20)
             };
             conditionsPanel.Controls.Add(conditionslabel);
+            //  добавления лейбла статуса на панель
             Label statuslabel = new Label
             {
                 Text = "Выберите статус сотрудинка:",
@@ -106,6 +99,7 @@ namespace TestForWork.View
                 Size = new Size(170, 20)
             };
             conditionsPanel.Controls.Add(statuslabel);
+            //  добавления рабочий статуса статуса на панель
             Label worklabel = new Label
             {
                 Text = "Выберите статус работника:",
@@ -113,14 +107,32 @@ namespace TestForWork.View
                 Size = new Size(170, 20)
             };
             conditionsPanel.Controls.Add(worklabel);
+            //  добавления лейбла статуса на панель
+            Label datastartlabel = new Label
+            {
+                Text = "Выберите дату :",
+                Location = new Point(10, 90),
+                Size = new Size(170, 20)
+            };
+            conditionsPanel.Controls.Add(datastartlabel);
+            //  добавления лейбла статуса на панель
+            Label dataendlabel = new Label
+            {
+                Text = "Выберите дату :",
+                Location = new Point(10, 120),
+                Size = new Size(170, 20)
+            };
+            conditionsPanel.Controls.Add(dataendlabel);
+            //  добавления комбобокса статуса на панель
             ComboBox statusComboBox = new ComboBox
             {
-                Items = {"хз", "хз", "хз"},
+                
                 Location = new Point(180, 30),
                 Size = new Size(200, 20),
                 DropDownStyle = ComboBoxStyle.DropDownList
             };
             conditionsPanel.Controls.Add(statusComboBox);
+            //  добавления комбобокса статуса работника на панель
             ComboBox workStatus = new ComboBox
             {
                 Items = {"принят", "уволен"},
@@ -129,7 +141,28 @@ namespace TestForWork.View
                 DropDownStyle = ComboBoxStyle.DropDownList
             };
             conditionsPanel.Controls.Add(workStatus);
-
+            //  добавления дататаймера начала на панель
+            DateTimePicker datafirst = new DateTimePicker 
+            {
+                BackColor = Color.Gainsboro,
+                Location = new Point(180, 90),
+                Size = new Size(200, 20),
+                Format = DateTimePickerFormat.Short,
+                MaxDate = DateAndTime.Today
+            };
+            conditionsPanel.Controls.Add(datafirst);
+            //  добавления дататаймера начала на панель
+            DateTimePicker datasecond = new DateTimePicker 
+            {
+                BackColor = Color.Gainsboro,
+                Location = new Point(180, 120),
+                Size = new Size(200, 20),
+                Format = DateTimePickerFormat.Short,
+                MaxDate = DateAndTime.Today
+                
+            };
+            conditionsPanel.Controls.Add(datasecond);
+            //  добавления кнопки на панель
             Button applyButton = new Button
             {
                 Text = "Применить",
@@ -139,7 +172,7 @@ namespace TestForWork.View
             };
             applyButton.Click += ApplyButton_Click;
             conditionsPanel.Controls.Add(applyButton);
-
+            
             Controls.Add(conditionsPanel);
             
         }
