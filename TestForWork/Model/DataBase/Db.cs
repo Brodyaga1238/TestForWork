@@ -1,7 +1,7 @@
-using System;
+
 using System.Configuration;
 using System.Data.SqlClient;
-using System.Threading.Tasks;
+
 
 namespace TestForWork.Model.DataBase
 {
@@ -10,12 +10,19 @@ namespace TestForWork.Model.DataBase
         private string MasterConnectionString { get; set; }
         private string EmployeeConnectionString { get; set; }
 
+
         public DatabaseCreator()
         {
             MasterConnectionString = ConfigurationManager.ConnectionStrings["MasterDB"].ConnectionString;
             EmployeeConnectionString = ConfigurationManager.ConnectionStrings["EmployeeDB"].ConnectionString;
-            CreateDatabaseAsync().Wait();
+            InitializeAsync();
+
         }
+         public async Task InitializeAsync()
+        {
+            await CreateDatabaseAsync();
+        }
+
 
         public async Task CreateDatabaseAsync()
         {
@@ -32,7 +39,7 @@ namespace TestForWork.Model.DataBase
                         "IF NOT EXISTS (SELECT name FROM sys.databases WHERE name = @namebase) CREATE DATABASE [" +
                         namebase + "]";
                     command.Parameters.AddWithValue("@namebase", namebase);
-                    command.Connection = connection;
+                    command.Connection = connection; 
                     await command.ExecuteNonQueryAsync();
                 }
                 catch (SqlException ex)
@@ -52,6 +59,8 @@ namespace TestForWork.Model.DataBase
                 }
             }
         }
+       
+
 
         private string GetDatabaseName()
         {
