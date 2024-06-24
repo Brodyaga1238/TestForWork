@@ -9,10 +9,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Presenter\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Compile Update="View\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
