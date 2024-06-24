@@ -27,7 +27,6 @@ namespace TestForWork.Model.DataBase
         public async Task CreateDatabaseAsync()
         {
             string namebase = GetDatabaseName();
-            Console.WriteLine(namebase);
 
             using (SqlConnection connection = new SqlConnection(MasterConnectionString))
             {
@@ -58,7 +57,9 @@ namespace TestForWork.Model.DataBase
                     }
                 }
             }
+            
         }
+        
        
 
 
