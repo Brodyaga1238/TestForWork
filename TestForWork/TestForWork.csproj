@@ -19,10 +19,4 @@
     <PackageReference Include="System.Data.SqlClient" Version="4.8.6" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Update="Model\DataBase\App.config">
-      <DependentUpon>Db.cs</DependentUpon>
-    </None>
-  </ItemGroup>
-
 </Project>

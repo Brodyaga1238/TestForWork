@@ -1,5 +1,6 @@
 
 using TestForWork.Model.DataBase;
+using TestForWork.Model.DataBase.DbCs;
 using TestForWork.View;
 
 namespace TestForWork.Presenter
@@ -28,7 +29,7 @@ namespace TestForWork.Presenter
         {
 
         }
-
+        // Логика обработки изменения промежутка дат
         public void DateRangeChanged(object sender, EventArgs e)
         {
 
@@ -40,12 +41,12 @@ namespace TestForWork.Presenter
                 _view.EndDate = c;
             }
             
-            
         }
-
+        // Логика обработки нажатия кнопки Применить
         public void ApllyButtonClicked(object sender, EventArgs e)
         {
             DatabaseCreator test = new DatabaseCreator();
+            test.ListEmployees();
         }
     }
 }

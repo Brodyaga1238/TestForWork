@@ -1,10 +1,9 @@
-
 using System.Configuration;
 using System.Data.SqlClient;
 
-namespace TestForWork.Model.DataBase
+namespace TestForWork.Model.DataBase.DbCs
 {
-    public class DatabaseCreator
+    public class DatabaseCreator: IDb
     {
         private string MasterConnectionString { get; set; }
         private string EmployeeConnectionString { get; set; }
@@ -54,7 +53,16 @@ namespace TestForWork.Model.DataBase
             }
             
         }
-        //Методнахождения пути и отправки на запуск процедур
+        // нахождение пути
+        private string GetProcedurePath(string fileName)
+        {
+            string basePath = AppDomain.CurrentDomain.BaseDirectory;
+            string relativePath = Path.Combine(basePath, "..", "..", "..", "Model", "DataBase", "Procedures");
+            return Path.GetFullPath(Path.Combine(relativePath, fileName));
+        }
+
+        
+        //отправка на запуск процедур
         private async Task RunProcedureAsync()
         {
             try
@@ -66,17 +74,10 @@ namespace TestForWork.Model.DataBase
                     "CreateTablePostProcedure.sql",
                     "CreateTableStatusProcedure.sql"
                 };
-                
-                string basePath = AppDomain.CurrentDomain.BaseDirectory;
-                string relativePath = Path.Combine(basePath, "..", "..", "..", "Model", "DataBase", "Procedures");
-                string GetFullPath(string fileName)
-                {
-                    return Path.GetFullPath(Path.Combine(relativePath, fileName));
-                }
                     
-                foreach (var c in listprocedure)
+                foreach (var procedureFileName  in listprocedure)
                 { 
-                    string scriptPath = GetFullPath(c); 
+                    string scriptPath = GetProcedurePath(procedureFileName ); 
                     await AddTables(scriptPath);
                 }
             }
@@ -120,5 +121,17 @@ namespace TestForWork.Model.DataBase
             SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder(EmployeeConnectionString);
             return builder.InitialCatalog;
         }
+
+        private async Task ReadFromBd(string path)
+        {
+           
+        }
+
+        public async Task ListEmployees()
+        {
+            string test = GetProcedurePath("ListEmployess.sql");
+            await ReadFromBd(test);
+        }
+        
     }
 }
