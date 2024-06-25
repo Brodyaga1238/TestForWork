@@ -6,9 +6,10 @@ SELECT
     LEFT(p.last_name, 1) + '.' AS Отчеество,
     s.name AS Статус,
     d.name AS Отдел,
-    p.date_employ AS Приём, 
-    p.date_uneploy AS Увольнение,
-    ps.name AS Должность
+    ps.name AS Должность,
+    p.date_employ AS Приём,
+    p.date_uneploy AS Увольнение
+    
     FROM dbo.persons p
         JOIN dbo.status s ON p.status = s.id 
             JOIN dbo.deps d on p.id_dep = d.id

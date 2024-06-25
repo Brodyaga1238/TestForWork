@@ -1,4 +1,5 @@
 using Microsoft.VisualBasic;
+using TestForWork.Model.DataBase.DbCs;
 using TestForWork.Presenter;
 
 namespace TestForWork.View
@@ -26,7 +27,8 @@ namespace TestForWork.View
         public MainForm()
         {
             InitializeComponent();
-            _presenter = new MainFormPresenter(this);
+            IDb db = new Database();
+            _presenter = new MainFormPresenter(this, db);
         }
         //Запуск создания всех элементов п.и.
         private void InitializeComponent()
@@ -206,12 +208,16 @@ namespace TestForWork.View
             ApplyButtonClicked?.Invoke(sender, e);
         }
         
-        //Событие списка
+        //Событие списка сотрудников
         private void list_employees_Click(object sender, EventArgs e)
         {
-            Controls.Remove(_conditionsPanel);
-            _conditionsPanel.Dispose(); 
-            _conditionsPanel = null;  
+            if (_conditionsPanel != null)
+            {
+                Controls.Remove(_conditionsPanel);
+                _conditionsPanel.Dispose(); 
+                _conditionsPanel = null;  
+            }
+          
             ListEmployeesClicked?.Invoke(sender, e);
         }
         //Событие статистики

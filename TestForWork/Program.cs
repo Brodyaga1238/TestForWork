@@ -13,8 +13,7 @@ namespace TestForWork
         {
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
-            DatabaseCreator test = new DatabaseCreator();
-            test.ListEmployees();
+            Database test = new Database();
             ApplicationConfiguration.Initialize();
             Application.Run(new MainForm());
         }

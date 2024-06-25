@@ -1,14 +1,15 @@
 using System.Configuration;
+
 using System.Data.SqlClient;
 
 namespace TestForWork.Model.DataBase.DbCs
 {
-    public class DatabaseCreator: IDb
+    public class Database: IDb
     {
         private string MasterConnectionString { get; set; }
         private string EmployeeConnectionString { get; set; }
         
-        public DatabaseCreator()
+        public Database()
         {
             MasterConnectionString = ConfigurationManager.ConnectionStrings["MasterDB"].ConnectionString;
             EmployeeConnectionString = ConfigurationManager.ConnectionStrings["EmployeeDB"].ConnectionString;
@@ -121,16 +122,58 @@ namespace TestForWork.Model.DataBase.DbCs
             SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder(EmployeeConnectionString);
             return builder.InitialCatalog;
         }
+        //вытаскивание строк из бд с добавлением с спиок
 
-        private async Task ReadFromBd(string path)
+        private async Task<List<Employee>> ReadFromBd(string path)
         {
-           
+            List<Employee> test = new List<Employee>();
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(EmployeeConnectionString))
+                {
+                    string script = await File.ReadAllTextAsync(path);
+                    await connection.OpenAsync();
+            
+                    SqlCommand command = new SqlCommand(script, connection);
+                    using (SqlDataReader reader = await command.ExecuteReaderAsync())
+                    {
+                        if (reader.HasRows) 
+                        {
+                            while (await reader.ReadAsync()) 
+                            {
+                                string fname = reader.GetString(0);
+                                string sname = reader.GetString(1);
+                                string lname = reader.GetString(2);
+                                string status = reader.GetString(3);
+                                string dep = reader.GetString(4);
+                                string post = reader.GetString(5);
+                                DateTime de = reader.GetDateTime(6);
+                                DateTime? du = null;
+                                if (!reader.IsDBNull(7))
+                                {
+                                    du = reader.GetDateTime(7);
+                                }
+                                Employee employee = new Employee(fname, sname, lname, de, du, status, dep, post);
+                                test.Add(employee);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            
+            return test;
         }
-
-        public async Task ListEmployees()
+        //метод получения списка сотрудников
+        public async Task<List<Employee>> ListEmployees()
         {
-            string test = GetProcedurePath("ListEmployess.sql");
-            await ReadFromBd(test);
+            string path = GetProcedurePath("ListEmployess.sql");
+            List<Employee> ListOfEmployee = new List<Employee>(await ReadFromBd(path));
+            return ListOfEmployee;
         }
         
     }
