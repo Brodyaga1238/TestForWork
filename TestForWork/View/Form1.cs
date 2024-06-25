@@ -17,6 +17,8 @@ namespace TestForWork.View
         public event EventHandler StatEmployeesClick;
         public event EventHandler DateRangeChanged;
         
+        public event EventHandler ApplyButtonClicked;
+        
         private Panel _conditionsPanel;
         
         private MainFormPresenter _presenter;
@@ -207,7 +209,7 @@ namespace TestForWork.View
         //Нажатие отправки запроса 
         private void ApplyButton_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Условия применены.", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            ApplyButtonClicked?.Invoke(sender, e);
         }
         
         //Событие списка

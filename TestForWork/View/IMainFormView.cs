@@ -5,6 +5,7 @@ namespace TestForWork.View
         event EventHandler ListEmployeesClicked;
         event EventHandler StatEmployeesClick;
         event EventHandler DateRangeChanged;
+        event EventHandler ApplyButtonClicked;
         DateTime StartDate { get; set; }
         DateTime EndDate { get; set; }
     }
