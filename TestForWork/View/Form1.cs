@@ -198,12 +198,6 @@ namespace TestForWork.View
             {
                 CreateConditionsPanel();
             }
-            else
-            {
-                Controls.Remove(_conditionsPanel);
-                _conditionsPanel.Dispose(); 
-                _conditionsPanel = null;  
-            }
          
         }
         //Нажатие отправки запроса 
@@ -215,6 +209,9 @@ namespace TestForWork.View
         //Событие списка
         private void list_employees_Click(object sender, EventArgs e)
         {
+            Controls.Remove(_conditionsPanel);
+            _conditionsPanel.Dispose(); 
+            _conditionsPanel = null;  
             ListEmployeesClicked?.Invoke(sender, e);
         }
         //Событие статистики

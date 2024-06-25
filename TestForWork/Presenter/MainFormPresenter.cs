@@ -45,8 +45,7 @@ namespace TestForWork.Presenter
         // Логика обработки нажатия кнопки Применить
         public void ApllyButtonClicked(object sender, EventArgs e)
         {
-            DatabaseCreator test = new DatabaseCreator();
-            test.ListEmployees();
+          
         }
     }
 }
