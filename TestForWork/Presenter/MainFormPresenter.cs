@@ -1,6 +1,4 @@
 
-using TestForWork.Model.DataBase;
-using TestForWork.Model.DataBase.DbCs;
 using TestForWork.View;
 
 namespace TestForWork.Presenter
