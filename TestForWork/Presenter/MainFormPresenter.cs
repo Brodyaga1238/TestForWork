@@ -22,8 +22,9 @@ namespace TestForWork.Presenter
         // Логика обработки нажатия кнопки "Список сотрудников"
         public async void ListEmployeesClicked(object sender, EventArgs e)
         {
-            List<Employee> Test= await _db.ListEmployees();
-            
+            List<Employee>  ListEmployees = await _db.ListEmployees();
+            _view.DisplayEmployees(ListEmployees);
+
         }
 
         // Логика обработки нажатия кнопки "Статистика сотрудников"

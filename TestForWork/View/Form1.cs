@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using Microsoft.VisualBasic;
 using TestForWork.Model.DataBase.DbCs;
 using TestForWork.Presenter;
@@ -21,6 +22,7 @@ namespace TestForWork.View
         public event EventHandler ApplyButtonClicked;
         
         private Panel _conditionsPanel;
+        private Panel _statPanel;
         
         private MainFormPresenter _presenter;
         //Инициализация
@@ -193,6 +195,99 @@ namespace TestForWork.View
             Controls.Add(_conditionsPanel);
             
         }
+
+        private void CreateStatPanell(List<Employee> employees)
+        {
+            _statPanel = new Panel
+            {
+                BackColor = Color.LightGray,
+                Size = new Size(750, 950),
+                Location = new Point(200, 10),
+            };
+            DataGridView dataGridView = new DataGridView
+            {
+                Dock = DockStyle.Fill,
+                AutoGenerateColumns = false,
+                AllowUserToAddRows = false,
+                ReadOnly = true,
+                RowHeadersVisible=false
+            };
+            dataGridView.DataSource = new BindingList<Employee>(employees);
+            
+            dataGridView.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                Name = "FirstName",
+                HeaderText = "Имя",
+                DataPropertyName = "Name", 
+                Width = 150,
+                SortMode = DataGridViewColumnSortMode.Automatic
+            });
+
+            dataGridView.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                Name = "LastNameInitial",
+                HeaderText = "Фамилия",
+                DataPropertyName = "SecondName",
+                Width = 75,
+                SortMode = DataGridViewColumnSortMode.Automatic
+            });
+
+            dataGridView.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                Name = "MiddleNameInitial",
+                HeaderText = "Отчество",
+                DataPropertyName = "LastName",
+                Width = 75,
+                SortMode = DataGridViewColumnSortMode.Automatic
+            });
+
+            dataGridView.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                Name = "Status",
+                HeaderText = "Статус",
+                DataPropertyName = "Status",
+                Width = 75,
+                SortMode = DataGridViewColumnSortMode.Automatic
+            });
+
+            dataGridView.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                Name = "Department",
+                HeaderText = "Отдел",
+                DataPropertyName = "Dep",
+                Width = 75,
+                SortMode = DataGridViewColumnSortMode.Automatic
+            });
+
+            dataGridView.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                Name = "DateEmploy",
+                HeaderText = "Приём",
+                DataPropertyName = "DateEmploy",
+                Width = 100,
+                SortMode = DataGridViewColumnSortMode.Automatic
+            });
+
+            dataGridView.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                Name = "DateUneploy",
+                HeaderText = "Увольнение",
+                DataPropertyName = "DateUnEmploy",
+                Width = 100,
+                SortMode = DataGridViewColumnSortMode.Automatic
+            });
+
+            dataGridView.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                Name = "Position",
+                HeaderText = "Должность",
+                DataPropertyName = "Post",
+                Width = 75,
+                SortMode = DataGridViewColumnSortMode.Automatic
+            });
+            _statPanel.Controls.Add(dataGridView);
+            Controls.Add(_statPanel);
+        }
         //Активация панели
         private void ShowConditionsPanel()
         {
@@ -201,6 +296,14 @@ namespace TestForWork.View
                 CreateConditionsPanel();
             }
          
+        }
+        //Активация панели Статистика
+        private void ShowStatPanell(List<Employee> employees)
+        {
+            if (_statPanel == null)
+            {
+                CreateStatPanell(employees);
+            }
         }
         //Нажатие отправки запроса 
         private void ApplyButton_Click(object sender, EventArgs e)
@@ -224,6 +327,12 @@ namespace TestForWork.View
         private void stat_employees_Click(object sender, EventArgs e)
         {
             ShowConditionsPanel();
+            if (_statPanel != null)
+            {
+                Controls.Remove(_statPanel);
+                _statPanel.Dispose(); 
+                _statPanel = null;  
+            }
             StatEmployeesClick?.Invoke(sender,e);
            
         }
@@ -233,6 +342,11 @@ namespace TestForWork.View
             StartDate = _datafirst.Value;
             EndDate =_datasecond.Value ;
             DateRangeChanged?.Invoke(sender, e);    
+        }
+        //Показывание списка сотрудников
+        public void DisplayEmployees(List<Employee> employees)
+        {
+            ShowStatPanell(employees);
         }
     }
 }

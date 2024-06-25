@@ -1,3 +1,5 @@
+using TestForWork.Model.DataBase.DbCs;
+
 namespace TestForWork.View
 {
     public interface IMainFormView
@@ -8,6 +10,7 @@ namespace TestForWork.View
         event EventHandler ApplyButtonClicked;
         DateTime StartDate { get; set; }
         DateTime EndDate { get; set; }
+        void DisplayEmployees(List<Employee> employees);
     }
 }
 

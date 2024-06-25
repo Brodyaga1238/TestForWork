@@ -1,25 +1,31 @@
 USE [EmployeeDB];
-IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'status' AND schema_id = SCHEMA_ID('dbo'))
+GO
+
+IF OBJECT_ID('dbo.CreateStatusTable', 'P') IS NULL
     BEGIN
-        CREATE TABLE [dbo].[status]
-        (
-            [id] [int] IDENTITY(1,1) NOT NULL,
-            [name] [varchar](100) NOT NULL,
-            CONSTRAINT [PK_status] PRIMARY KEY CLUSTERED
+        EXEC('CREATE PROCEDURE dbo.CreateStatusTable AS BEGIN
+    IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = ''status'' AND schema_id = SCHEMA_ID(''dbo''))
+        BEGIN
+            CREATE TABLE [dbo].[status]
             (
-                [id] ASC
-            )
-                WITH 
+                [id] [int] IDENTITY(1,1) NOT NULL,
+                  NOT NULL,
+                CONSTRAINT [PK_status] PRIMARY KEY CLUSTERED
                     (
-                    PAD_INDEX  = OFF, 
-                    STATISTICS_NORECOMPUTE  = OFF,
-                    IGNORE_DUP_KEY = OFF,
-                    ALLOW_ROW_LOCKS  = ON,
-                    ALLOW_PAGE_LOCKS  = ON
-                    ) 
+                     [id] ASC
+                    )
+                    WITH
+                        (
+                        PAD_INDEX  = OFF,
+                        STATISTICS_NORECOMPUTE  = OFF,
+                        IGNORE_DUP_KEY = OFF,
+                        ALLOW_ROW_LOCKS  = ON,
+                        ALLOW_PAGE_LOCKS  = ON
+                        )
+                    ON [PRIMARY]
+            )
                 ON [PRIMARY]
-        ) 
-            ON [PRIMARY]
-    end 
-
-
+        END
+    END')
+    END;
+GO
