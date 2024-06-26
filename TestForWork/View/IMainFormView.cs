@@ -6,12 +6,13 @@ namespace TestForWork.View
     {
         event EventHandler ListEmployeesClicked;
         event EventHandler StatEmployeesClick;
-        event EventHandler DateRangeChanged;
         event EventHandler ApplyButtonClicked;
+        string SelectedStatus { get; }
         DateTime StartDate { get; set; }
         DateTime EndDate { get; set; }
         void DisplayEmployees(List<Employee> employees);
         void AddStatuses(List<string> statuses);
+        void DisplayStatusCount(Dictionary<DateTime, int> statcount);
     }
 }
 

@@ -1,5 +1,4 @@
 using System.Configuration;
-
 using System.Data.SqlClient;
 
 namespace TestForWork.Model.DataBase.DbCs
@@ -15,14 +14,19 @@ namespace TestForWork.Model.DataBase.DbCs
             EmployeeConnectionString = ConfigurationManager.ConnectionStrings["EmployeeDB"].ConnectionString;
             InitializeAsync();
         }
-        //Запуск инициализации на создание бд и таблиц
-         public async Task InitializeAsync()
+
+        /// <summary>
+        /// Инициализация на создание базы данных и таблиц.
+        /// </summary>
+        public async Task InitializeAsync()
         {
             await CreateDatabaseAsync();
             await RunProcedureAsync();
         }
 
-        //создание бд 
+        /// <summary>
+        /// Создание базы данных.
+        /// </summary>
         public async Task CreateDatabaseAsync()
         {
             string namebase = GetDatabaseName();
@@ -53,7 +57,12 @@ namespace TestForWork.Model.DataBase.DbCs
                 }
             }
         }
-        // нахождение пути
+
+        /// <summary>
+        /// Нахождение пути к файлу с процедурой.
+        /// </summary>
+        /// <param name="fileName">Имя файла с процедурой.</param>
+        /// <returns>Полный путь к файлу с процедурой.</returns>
         private string GetProcedurePath(string fileName)
         {
             string basePath = AppDomain.CurrentDomain.BaseDirectory;
@@ -61,8 +70,9 @@ namespace TestForWork.Model.DataBase.DbCs
             return Path.GetFullPath(Path.Combine(relativePath, fileName));
         }
 
-        
-        //отправка на запуск процедур
+        /// <summary>
+        /// Отправка на запуск процедур.
+        /// </summary>
         private async Task RunProcedureAsync()
         {
             try
@@ -74,7 +84,7 @@ namespace TestForWork.Model.DataBase.DbCs
                     "CreateTablePostProcedure.sql",
                     "CreateTableStatusProcedure.sql",
                     "ListEmployess.sql",
-                    "StatEmplyees.sql"
+                    "Statuses.sql"
                 };
                 string path;
                 foreach (var procedureFileName  in listprocedure)
@@ -92,7 +102,11 @@ namespace TestForWork.Model.DataBase.DbCs
                 Console.WriteLine("General Exception: " + ex.Message);
             }
         }
-        //Метод запуска запросов для создания процедур из файла через путь
+
+        /// <summary>
+        /// Метод запуска запросов для создания процедур из файла через путь.
+        /// </summary>
+        /// <param name="path">Путь к файлу с процедурой.</param>
         private async Task CreateProc(string path)
         {
             try
@@ -115,16 +129,23 @@ namespace TestForWork.Model.DataBase.DbCs
             {
                 Console.WriteLine("General Exception: " + ex.Message);
             }
-            
         }
-        // получение названия бд
+
+        /// <summary>
+        /// Получение названия базы данных.
+        /// </summary>
+        /// <returns>Название базы данных.</returns>
         private string GetDatabaseName()
         {
             SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder(EmployeeConnectionString);
             return builder.InitialCatalog;
         }
-        //вытаскивание строк из бд с добавлением с спиок
 
+        /// <summary>
+        /// Вытаскивание строк из базы данных списка сотрудников.
+        /// </summary>
+        /// <param name="procedure">Имя хранимой процедуры.</param>
+        /// <returns>Список сотрудников.</returns>
         private async Task<List<Employee>> ReadFromBdListEmplyee(string procedure)
         {
             List<Employee> employees = new List<Employee>();
@@ -140,7 +161,6 @@ namespace TestForWork.Model.DataBase.DbCs
                         {
                             while (await reader.ReadAsync()) 
                             {
-                                
                                 string fname = reader.GetString(0);
                                 string sname = reader.GetString(1);
                                 string lname = reader.GetString(2);
@@ -167,6 +187,12 @@ namespace TestForWork.Model.DataBase.DbCs
             }
             return employees;
         }
+
+        /// <summary>
+        /// Чтение из базы данных статусов.
+        /// </summary>
+        /// <param name="procedure">Имя хранимой процедуры.</param>
+        /// <returns>Список статусов.</returns>
         private async Task<List<string>> ReadFromBdStatus(string procedure)
         {
             List<string> statuses = new List<string>();
@@ -197,7 +223,11 @@ namespace TestForWork.Model.DataBase.DbCs
                 throw;
             }
         }
-        //метод получения списка сотрудников
+
+        /// <summary>
+        /// Метод получения списка сотрудников.
+        /// </summary>
+        /// <returns>Список сотрудников.</returns>
         public async Task<List<Employee>> ListEmployees()
         {
             string procedure = "GetEmployeeData";
@@ -206,12 +236,87 @@ namespace TestForWork.Model.DataBase.DbCs
             return ListOfEmployee;
         }
 
+        /// <summary>
+        /// Метод получения количества сотрудников по дням.
+        /// </summary>
+        /// <param name="procedure">Имя хранимой процедуры.</param>
+        /// <returns>Словарь с датами и количеством сотрудников.</returns>
+       
+        
+
+        /// <summary>
+        /// Метод получения статусов.
+        /// </summary>
+        /// <returns>Список статусов.</returns>
         public async Task<List<string>> ListStatus()
         {
-            string procedure = "GetStatData";
+            string procedure = "Statuses";
             List<string> test =await ReadFromBdStatus(procedure);
             return test;
         }
-        
+        private async Task<Dictionary<DateTime,int>> GetFromBdStatusesDay(string procedure,string status, DateTime startDate, DateTime endDate)
+        {
+            Dictionary<DateTime, int> statuses = new Dictionary<DateTime, int>();
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(EmployeeConnectionString))
+                {
+                    await connection.OpenAsync();
+                    SqlCommand command = new SqlCommand(procedure, connection);
+                    using (SqlDataReader reader = await command.ExecuteReaderAsync())
+                    {
+                        if (reader.HasRows) 
+                        {
+                            while (await reader.ReadAsync())
+                            {
+                                string statusdb = reader.GetString(0);
+                                if (status == statusdb)
+                                {
+                                    DateTime data1 = reader.GetDateTime(1);
+                                    DateTime? data2 = null;
+                                    if (!reader.IsDBNull(2))
+                                    {
+                                        data2 = reader.GetDateTime(2);
+                                    }
+                                    if ((data1 >= startDate && data1 <= endDate) || (data2.HasValue && data2.Value >= startDate && data2.Value <= endDate))
+                                    {
+                                        // Определяем дату, которая будет использоваться для агрегации (data1 или data2, если data2 не null)
+                                        DateTime dateToUse = data2 ?? data1.Date;
+
+                                        // Увеличиваем счетчик для данной даты
+                                        if (statuses.ContainsKey(dateToUse))
+                                        {
+                                            statuses[dateToUse]++;
+                                        }
+                                        else
+                                        {
+                                            statuses[dateToUse] = 1;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                return statuses;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Метод получения количества сотрудников по дням.
+        /// </summary>
+        /// <returns>Словарь с датами и количеством сотрудников.</returns>
+        public async Task<Dictionary<DateTime, int>> EmployeesByDay(string status, DateTime startDate, DateTime endDate)
+        {
+            string procedure = "StatEmplyeesByData";
+            Dictionary<DateTime, int> employeesByDay = await GetFromBdStatusesDay(procedure,status,startDate,endDate);
+            return employeesByDay;
+        }
     }
 }
