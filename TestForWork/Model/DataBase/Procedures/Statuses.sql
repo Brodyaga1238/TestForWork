@@ -1,10 +1,9 @@
 USE [EmployeeDB];
 
-
-IF OBJECT_ID('dbo.GetStatData', 'P') IS NULL
+IF OBJECT_ID('dbo.Statuses', 'P') IS NULL
     BEGIN
         EXEC('
-        CREATE PROCEDURE dbo.GetStatData
+        CREATE PROCEDURE dbo.Statuses
         AS
         BEGIN
             SELECT s.name AS Статус
@@ -12,4 +11,3 @@ IF OBJECT_ID('dbo.GetStatData', 'P') IS NULL
         END
     ');
     END;
-

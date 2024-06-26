@@ -3,8 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\nurla\\RiderProjects\\ss\\TestForWork\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{E420692C-AB44-4C6F-BFB1-3FC3180F3BF4}|TestForWork\\TestForWork.csproj|c:\\users\\nurla\\riderprojects\\ss\\testforwork\\testforwork\\model\\database\\db.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E420692C-AB44-4C6F-BFB1-3FC3180F3BF4}|TestForWork\\TestForWork.csproj|solutionrelative:testforwork\\model\\database\\db.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E420692C-AB44-4C6F-BFB1-3FC3180F3BF4}|TestForWork\\TestForWork.csproj|c:\\users\\nurla\\riderprojects\\ss\\testforwork\\testforwork\\model\\database\\dbcs\\database.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E420692C-AB44-4C6F-BFB1-3FC3180F3BF4}|TestForWork\\TestForWork.csproj|solutionrelative:testforwork\\model\\database\\dbcs\\database.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E420692C-AB44-4C6F-BFB1-3FC3180F3BF4}|TestForWork\\TestForWork.csproj|c:\\users\\nurla\\riderprojects\\ss\\testforwork\\testforwork\\model\\database\\dbcs\\idb.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E420692C-AB44-4C6F-BFB1-3FC3180F3BF4}|TestForWork\\TestForWork.csproj|solutionrelative:testforwork\\model\\database\\dbcs\\idb.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\nurla\\RiderProjects\\ss\\TestForWork\\TestForWork\\Model\\DataBase\\Db.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:TestForWork\\Model\\DataBase\\Db.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\nurla\\RiderProjects\\ss\\TestForWork\\TestForWork\\App.config||{8B382828-6202-11D1-8870-0000F87579D2}",
@@ -42,7 +50,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -54,20 +62,44 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "IDb.cs",
+              "DocumentMoniker": "C:\\Users\\nurla\\RiderProjects\\ss\\TestForWork\\TestForWork\\Model\\DataBase\\DbCs\\IDb.cs",
+              "RelativeDocumentMoniker": "TestForWork\\Model\\DataBase\\DbCs\\IDb.cs",
+              "ToolTip": "C:\\Users\\nurla\\RiderProjects\\ss\\TestForWork\\TestForWork\\Model\\DataBase\\DbCs\\IDb.cs",
+              "RelativeToolTip": "TestForWork\\Model\\DataBase\\DbCs\\IDb.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-26T18:51:42.446Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "Database.cs",
+              "DocumentMoniker": "C:\\Users\\nurla\\RiderProjects\\ss\\TestForWork\\TestForWork\\Model\\DataBase\\DbCs\\Database.cs",
+              "RelativeDocumentMoniker": "TestForWork\\Model\\DataBase\\DbCs\\Database.cs",
+              "ToolTip": "C:\\Users\\nurla\\RiderProjects\\ss\\TestForWork\\TestForWork\\Model\\DataBase\\DbCs\\Database.cs",
+              "RelativeToolTip": "TestForWork\\Model\\DataBase\\DbCs\\Database.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-26T18:51:39.764Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "Db.cs",
               "DocumentMoniker": "C:\\Users\\nurla\\RiderProjects\\ss\\TestForWork\\TestForWork\\Model\\DataBase\\Db.cs",
               "RelativeDocumentMoniker": "TestForWork\\Model\\DataBase\\Db.cs",
               "ToolTip": "C:\\Users\\nurla\\RiderProjects\\ss\\TestForWork\\TestForWork\\Model\\DataBase\\Db.cs",
               "RelativeToolTip": "TestForWork\\Model\\DataBase\\Db.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-24T20:56:48.785Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-24T20:56:48.785Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "App.config",
               "DocumentMoniker": "C:\\Users\\nurla\\RiderProjects\\ss\\TestForWork\\TestForWork\\App.config",
               "RelativeDocumentMoniker": "TestForWork\\App.config",
@@ -78,7 +110,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "TestForWork.csproj",
               "DocumentMoniker": "C:\\Users\\nurla\\RiderProjects\\ss\\TestForWork\\TestForWork\\TestForWork.csproj",
               "RelativeDocumentMoniker": "TestForWork\\TestForWork.csproj",
@@ -90,7 +122,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 6,
               "Title": "Form1.cs",
               "DocumentMoniker": "C:\\Users\\nurla\\RiderProjects\\ss\\TestForWork\\TestForWork\\Form1.cs",
               "RelativeDocumentMoniker": "TestForWork\\Form1.cs",
@@ -101,7 +133,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 7,
               "Title": "Form1.Designer.cs",
               "DocumentMoniker": "C:\\Users\\nurla\\RiderProjects\\ss\\TestForWork\\TestForWork\\Form1.Designer.cs",
               "RelativeDocumentMoniker": "TestForWork\\Form1.Designer.cs",
@@ -113,7 +145,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 5,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\nurla\\RiderProjects\\ss\\TestForWork\\TestForWork\\Program.cs",
               "RelativeDocumentMoniker": "TestForWork\\Program.cs",
@@ -125,7 +157,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 8,
               "Title": "Form1.resx",
               "DocumentMoniker": "C:\\Users\\nurla\\RiderProjects\\ss\\TestForWork\\TestForWork\\Form1.resx",
               "RelativeDocumentMoniker": "TestForWork\\Form1.resx",
@@ -136,7 +168,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 9,
               "Title": "Form1.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0435]",
               "DocumentMoniker": "C:\\Users\\nurla\\RiderProjects\\ss\\TestForWork\\TestForWork\\Form1.cs",
               "RelativeDocumentMoniker": "TestForWork\\Form1.cs",
