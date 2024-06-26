@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="SqlDialectMappings">
-    <file url="file://$PROJECT_DIR$/TestForWork/Model/DataBase/Procedures/CreateTableStatusProcedure.sql" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/TestForWork/Model/DataBase/Procedures/CreateTableDepsTableProcedure.sql" dialect="TSQL" />
+    <file url="file://$PROJECT_DIR$/TestForWork/Model/DataBase/Procedures/CreateTablePersonsProcedure.sql" dialect="TSQL" />
+    <file url="file://$PROJECT_DIR$/TestForWork/Model/DataBase/Procedures/CreateTablePostProcedure.sql" dialect="TSQL" />
+    <file url="file://$PROJECT_DIR$/TestForWork/Model/DataBase/Procedures/CreateTableStatusProcedure.sql" dialect="TSQL" />
+    <file url="file://$PROJECT_DIR$/TestForWork/Model/DataBase/Procedures/ListEmployess.sql" dialect="TSQL" />
+    <file url="file://$PROJECT_DIR$/TestForWork/Model/DataBase/Procedures/StatEmplyees.sql" dialect="TSQL" />
     <file url="PROJECT" dialect="MySQL" />
   </component>
 </project>

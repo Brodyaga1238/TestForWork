@@ -52,7 +52,6 @@ namespace TestForWork.Model.DataBase.DbCs
                     Console.WriteLine("General Exception: " + ex.Message);
                 }
             }
-            
         }
         // нахождение пути
         private string GetProcedurePath(string fileName)
@@ -73,13 +72,15 @@ namespace TestForWork.Model.DataBase.DbCs
                     "CreateTableDepsTableProcedure.sql",
                     "CreateTablePersonsProcedure.sql",
                     "CreateTablePostProcedure.sql",
-                    "CreateTableStatusProcedure.sql"
+                    "CreateTableStatusProcedure.sql",
+                    "ListEmployess.sql",
+                    "StatEmplyees.sql"
                 };
-                    
+                string path;
                 foreach (var procedureFileName  in listprocedure)
-                { 
-                    string scriptPath = GetProcedurePath(procedureFileName ); 
-                    await AddTables(scriptPath);
+                {
+                    path = GetProcedurePath(procedureFileName);
+                    await AddTables(path);
                 }
             }
             catch (SqlException ex)
@@ -92,15 +93,14 @@ namespace TestForWork.Model.DataBase.DbCs
             }
         }
         //Метод запуска процедур из файла через путь
-        private async Task AddTables(string path)
+        private async Task AddTables(string procedure)
         {
             try
             {
-                string script = await File.ReadAllTextAsync(path);
                 using (SqlConnection connection = new SqlConnection(MasterConnectionString))
                 {
                     await connection.OpenAsync();
-                    using (SqlCommand command = new SqlCommand(script, connection))
+                    using (SqlCommand command = new SqlCommand(procedure, connection))
                     {
                         await command.ExecuteNonQueryAsync();
                     }
@@ -124,17 +124,15 @@ namespace TestForWork.Model.DataBase.DbCs
         }
         //вытаскивание строк из бд с добавлением с спиок
 
-        private async Task<List<Employee>> ReadFromBd(string path)
+        private async Task<List<Employee>> ReadFromBd(string procedure)
         {
             List<Employee> test = new List<Employee>();
             try
             {
                 using (SqlConnection connection = new SqlConnection(EmployeeConnectionString))
                 {
-                    string script = await File.ReadAllTextAsync(path);
                     await connection.OpenAsync();
-            
-                    SqlCommand command = new SqlCommand(script, connection);
+                    SqlCommand command = new SqlCommand(procedure, connection);
                     using (SqlDataReader reader = await command.ExecuteReaderAsync())
                     {
                         if (reader.HasRows) 
@@ -172,8 +170,8 @@ namespace TestForWork.Model.DataBase.DbCs
         //метод получения списка сотрудников
         public async Task<List<Employee>> ListEmployees()
         {
-            string path = GetProcedurePath("ListEmployess.sql");
-            List<Employee> ListOfEmployee = new List<Employee>(await ReadFromBd(path));
+            string procedure = "GetEmployeeData";
+            List<Employee> ListOfEmployee = new List<Employee>(await ReadFromBd(procedure));
             return ListOfEmployee;
         }
         
