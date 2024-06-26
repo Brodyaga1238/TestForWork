@@ -1,5 +1,5 @@
 USE [EmployeeDB];
-GO
+
 
 IF OBJECT_ID('dbo.CreateDepsTable', 'P') IS NULL
 BEGIN
@@ -29,4 +29,4 @@ BEGIN
         END
     END')
         END;
-GO
+

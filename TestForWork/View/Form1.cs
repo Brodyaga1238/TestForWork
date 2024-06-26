@@ -1,5 +1,4 @@
 using System.ComponentModel;
-using Microsoft.VisualBasic;
 using TestForWork.Model.DataBase.DbCs;
 using TestForWork.Presenter;
 
@@ -9,7 +8,7 @@ namespace TestForWork.View
     {
         private DateTimePicker _datafirst;
         private DateTimePicker _datasecond;
-
+        
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         
@@ -90,7 +89,7 @@ namespace TestForWork.View
             Controls.Add(statEmployees); 
         }
         // Создание панели с условиями
-        private void CreateConditionsPanel()
+        private void CreateStatPanel()
         {
             _conditionsPanel = new Panel
             {
@@ -99,7 +98,7 @@ namespace TestForWork.View
                 Location = new Point(200, 10),
                
             };
-
+            Console.WriteLine(3);
             //  добавления элементов на панель
             //  добавления лейбла условия на панель
             Label conditionslabel = new Label
@@ -117,14 +116,6 @@ namespace TestForWork.View
                 Size = new Size(170, 20)
             };
             _conditionsPanel.Controls.Add(statuslabel);
-            //  добавления рабочий статуса статуса на панель
-            Label worklabel = new Label
-            {
-                Text = "Выберите статус работника:",
-                Location = new Point(10, 60),
-                Size = new Size(170, 20)
-            };
-            _conditionsPanel.Controls.Add(worklabel);
             //  добавления лейбла статуса на панель
             Label datastartlabel = new Label
             {
@@ -141,24 +132,6 @@ namespace TestForWork.View
                 Size = new Size(170, 20)
             };
             _conditionsPanel.Controls.Add(dataendlabel);
-            //  добавления комбобокса статуса на панель
-            ComboBox statusComboBox = new ComboBox
-            {
-                
-                Location = new Point(180, 30),
-                Size = new Size(200, 20),
-                DropDownStyle = ComboBoxStyle.DropDownList
-            };
-            _conditionsPanel.Controls.Add(statusComboBox);
-            //  добавления комбобокса статуса работника на панель
-            ComboBox workStatus = new ComboBox
-            {
-                Items = {"принят", "уволен"},
-                Location = new Point(180, 60),
-                Size = new Size(200, 20),
-                DropDownStyle = ComboBoxStyle.DropDownList
-            };
-            _conditionsPanel.Controls.Add(workStatus);
             //  добавления дататаймера начала на панель
              _datafirst = new DateTimePicker 
             {
@@ -196,7 +169,7 @@ namespace TestForWork.View
             
         }
 
-        private void CreateStatPanell(List<Employee> employees)
+        private void CreateEmplyeesPanell(List<Employee> employees)
         {
             _statPanel = new Panel
             {
@@ -293,16 +266,16 @@ namespace TestForWork.View
         {
             if (_conditionsPanel == null)
             {
-                CreateConditionsPanel();
+                CreateStatPanel();
             }
          
         }
         //Активация панели Статистика
-        private void ShowStatPanell(List<Employee> employees)
+        private void ShowEmployeesPanell(List<Employee> employees)
         {
             if (_statPanel == null)
             {
-                CreateStatPanell(employees);
+                CreateEmplyeesPanell(employees);
             }
         }
         //Нажатие отправки запроса 
@@ -326,6 +299,7 @@ namespace TestForWork.View
         //Событие статистики
         private void stat_employees_Click(object sender, EventArgs e)
         {
+            
             ShowConditionsPanel();
             if (_statPanel != null)
             {
@@ -334,7 +308,6 @@ namespace TestForWork.View
                 _statPanel = null;  
             }
             StatEmployeesClick?.Invoke(sender,e);
-           
         }
         //Событие изменеия периода
         private void DataRangeChanged(object sender, EventArgs e)
@@ -346,7 +319,22 @@ namespace TestForWork.View
         //Показывание списка сотрудников
         public void DisplayEmployees(List<Employee> employees)
         {
-            ShowStatPanell(employees);
+            ShowEmployeesPanell(employees);
+        }
+        //Список статусов
+        public void AddStatuses(List<string> statuses)
+        {
+            ComboBox statusComboBox = new ComboBox
+            {
+                Location = new Point(180, 30),
+                Size = new Size(200, 20),
+                DropDownStyle = ComboBoxStyle.DropDownList
+            };
+            foreach (var status in statuses)
+            {
+                statusComboBox.Items.Add(status);
+            }
+            _conditionsPanel.Controls.Add(statusComboBox);
         }
     }
 }

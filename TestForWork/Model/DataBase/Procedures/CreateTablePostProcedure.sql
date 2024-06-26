@@ -1,5 +1,5 @@
 USE [EmployeeDB];
-GO
+
 
 IF OBJECT_ID('dbo.CreatePostTable', 'P') IS NULL
     BEGIN
@@ -30,4 +30,4 @@ IF OBJECT_ID('dbo.CreatePostTable', 'P') IS NULL
         END
     END')
     END;
-GO
+

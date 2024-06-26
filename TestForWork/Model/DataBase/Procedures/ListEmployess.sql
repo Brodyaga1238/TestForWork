@@ -1,5 +1,5 @@
 USE [EmployeeDB];
-GO
+
 
 IF OBJECT_ID('dbo.GetEmployeeData', 'P') IS NULL
     BEGIN
@@ -18,4 +18,4 @@ IF OBJECT_ID('dbo.GetEmployeeData', 'P') IS NULL
              JOIN dbo.posts ps ON p.id_post = ps.id;
     END')
     END;
-GO
+

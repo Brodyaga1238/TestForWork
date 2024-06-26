@@ -22,15 +22,16 @@ namespace TestForWork.Presenter
         // Логика обработки нажатия кнопки "Список сотрудников"
         public async void ListEmployeesClicked(object sender, EventArgs e)
         {
-            List<Employee>  ListEmployees = await _db.ListEmployees();
-            _view.DisplayEmployees(ListEmployees);
-
+            List<Employee>  listEmployees = await _db.ListEmployees();
+            _view.DisplayEmployees(listEmployees);
+           
         }
 
         // Логика обработки нажатия кнопки "Статистика сотрудников"
-        public void StatEmployeesClick(object sender, EventArgs e)
+        public async void StatEmployeesClick(object sender, EventArgs e)
         {
-
+            List<string> statuses = await _db.ListStatus();
+            _view.AddStatuses(statuses);
         }
         // Логика обработки изменения промежутка дат
         public void DateRangeChanged(object sender, EventArgs e)

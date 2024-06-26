@@ -1,5 +1,5 @@
 USE [EmployeeDB];
-GO
+
 
 IF OBJECT_ID('dbo.CreatePersonsTable', 'P') IS NULL
     BEGIN
@@ -36,4 +36,4 @@ IF OBJECT_ID('dbo.CreatePersonsTable', 'P') IS NULL
         END
     END')
     END;
-GO
+

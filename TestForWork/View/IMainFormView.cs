@@ -11,6 +11,7 @@ namespace TestForWork.View
         DateTime StartDate { get; set; }
         DateTime EndDate { get; set; }
         void DisplayEmployees(List<Employee> employees);
+        void AddStatuses(List<string> statuses);
     }
 }
 

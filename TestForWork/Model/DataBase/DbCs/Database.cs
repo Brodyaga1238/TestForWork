@@ -80,7 +80,7 @@ namespace TestForWork.Model.DataBase.DbCs
                 foreach (var procedureFileName  in listprocedure)
                 {
                     path = GetProcedurePath(procedureFileName);
-                    await AddTables(path);
+                    await CreateProc(path);
                 }
             }
             catch (SqlException ex)
@@ -92,15 +92,16 @@ namespace TestForWork.Model.DataBase.DbCs
                 Console.WriteLine("General Exception: " + ex.Message);
             }
         }
-        //Метод запуска процедур из файла через путь
-        private async Task AddTables(string procedure)
+        //Метод запуска запросов для создания процедур из файла через путь
+        private async Task CreateProc(string path)
         {
             try
             {
+                string script = await File.ReadAllTextAsync(path);
                 using (SqlConnection connection = new SqlConnection(MasterConnectionString))
                 {
                     await connection.OpenAsync();
-                    using (SqlCommand command = new SqlCommand(procedure, connection))
+                    using (SqlCommand command = new SqlCommand(script, connection))
                     {
                         await command.ExecuteNonQueryAsync();
                     }
@@ -124,9 +125,9 @@ namespace TestForWork.Model.DataBase.DbCs
         }
         //вытаскивание строк из бд с добавлением с спиок
 
-        private async Task<List<Employee>> ReadFromBd(string procedure)
+        private async Task<List<Employee>> ReadFromBdListEmplyee(string procedure)
         {
-            List<Employee> test = new List<Employee>();
+            List<Employee> employees = new List<Employee>();
             try
             {
                 using (SqlConnection connection = new SqlConnection(EmployeeConnectionString))
@@ -153,7 +154,7 @@ namespace TestForWork.Model.DataBase.DbCs
                                     du = reader.GetDateTime(7);
                                 }
                                 Employee employee = new Employee(fname, sname, lname, de, du, status, dep, post);
-                                test.Add(employee);
+                                employees.Add(employee);
                             }
                         }
                     }
@@ -164,15 +165,52 @@ namespace TestForWork.Model.DataBase.DbCs
                 Console.WriteLine(e);
                 throw;
             }
-            
-            return test;
+            return employees;
+        }
+        private async Task<List<string>> ReadFromBdStatus(string procedure)
+        {
+            List<string> statuses = new List<string>();
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(EmployeeConnectionString))
+                {
+                    await connection.OpenAsync();
+                    SqlCommand command = new SqlCommand(procedure, connection);
+                    using (SqlDataReader reader = await command.ExecuteReaderAsync())
+                    {
+                        if (reader.HasRows) 
+                        {
+                            while (await reader.ReadAsync())
+                            {
+                                string status = reader.GetString(0);
+                                statuses.Add(status);
+                            }
+                        }
+                    }
+                }
+
+                return statuses;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
         }
         //метод получения списка сотрудников
         public async Task<List<Employee>> ListEmployees()
         {
             string procedure = "GetEmployeeData";
-            List<Employee> ListOfEmployee = new List<Employee>(await ReadFromBd(procedure));
+            List<Employee> ListOfEmployee = new List<Employee>(await ReadFromBdListEmplyee(procedure));
+            
             return ListOfEmployee;
+        }
+
+        public async Task<List<string>> ListStatus()
+        {
+            string procedure = "GetStatData";
+            List<string> test =await ReadFromBdStatus(procedure);
+            return test;
         }
         
     }

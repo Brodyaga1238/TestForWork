@@ -1,5 +1,5 @@
 USE [EmployeeDB];
-GO
+
 
 IF OBJECT_ID('dbo.GetStatData', 'P') IS NULL
     BEGIN
@@ -12,4 +12,4 @@ IF OBJECT_ID('dbo.GetStatData', 'P') IS NULL
         END
     ');
     END;
-GO
+

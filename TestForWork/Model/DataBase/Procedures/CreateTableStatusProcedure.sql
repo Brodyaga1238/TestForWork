@@ -1,5 +1,5 @@
 USE [EmployeeDB];
-GO
+
 
 IF OBJECT_ID('dbo.CreateStatusTable', 'P') IS NULL
     BEGIN
@@ -28,4 +28,4 @@ IF OBJECT_ID('dbo.CreateStatusTable', 'P') IS NULL
         END
     END')
     END;
-GO
+
