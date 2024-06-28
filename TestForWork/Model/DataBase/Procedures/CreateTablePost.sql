@@ -1,17 +1,13 @@
 USE [EmployeeDB];
 
 
-IF OBJECT_ID('dbo.CreatePostTable', 'P') IS NULL
-    BEGIN
-        EXEC('CREATE PROCEDURE dbo.CreatePostTable
-    AS
-    BEGIN
-        IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = ''posts'' AND schema_id = SCHEMA_ID(''dbo''))
+
+    IF OBJECT_ID('dbo.posts', 'U') IS NULL
         BEGIN
             CREATE TABLE [dbo].[posts]
             (
                 [id] [int] IDENTITY(1,1) NOT NULL,
-                  NOT NULL,
+                [name] [varchar](100) NOT NULL,
                 CONSTRAINT [PK_posts] PRIMARY KEY CLUSTERED
                 (
                     [id] ASC
@@ -28,6 +24,4 @@ IF OBJECT_ID('dbo.CreatePostTable', 'P') IS NULL
             ) 
             ON [PRIMARY]
         END
-    END')
-    END;
-
+  
