@@ -79,10 +79,10 @@ namespace TestForWork.Model.DataBase.DbCs
             {
                 List<string> listprocedure = new List<string>()
                 {
-                    "CreateTableDepsTableProcedure.sql",
-                    "CreateTablePersonsProcedure.sql",
-                    "CreateTablePostProcedure.sql",
-                    "CreateTableStatusProcedure.sql",
+                    "CreateTableDepsTable.sql",
+                    "CreateTablePersons.sql",
+                    "CreateTablePost.sql",
+                    "CreateTableStatus.sql",
                     "ListEmployess.sql",
                     "Statuses.sql",
                     "StatEmplyeesByData.sql"
