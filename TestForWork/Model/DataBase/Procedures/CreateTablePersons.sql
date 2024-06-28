@@ -1,19 +1,14 @@
-USE [EmployeeDB];
+USE EmployeeDB;
 
 
-IF OBJECT_ID('dbo.CreatePersonsTable', 'P') IS NULL
-    BEGIN
-        EXEC('CREATE PROCEDURE dbo.CreatePersonsTable
-    AS
-    BEGIN
-        IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = ''persons'' AND schema_id = SCHEMA_ID(''dbo''))
+    IF OBJECT_ID('dbo.persons', 'U') IS NULL
         BEGIN
             CREATE TABLE [dbo].[persons]
             (
                 [id] [int] IDENTITY(1,1) NOT NULL,
-                  NOT NULL,
-                  NOT NULL,
-                  NOT NULL,
+                [first_name] [varchar](100) NOT NULL,
+                [second_name] [varchar](100) NOT NULL,
+                [last_name] [varchar](100) NOT NULL,
                 [date_employ] [datetime] NULL,
                 [date_uneploy] [datetime] NULL,
                 [status] [int] NOT NULL,
@@ -34,6 +29,4 @@ IF OBJECT_ID('dbo.CreatePersonsTable', 'P') IS NULL
                 ON [PRIMARY]
             ) ON [PRIMARY]
         END
-    END')
-    END;
-
+ 
