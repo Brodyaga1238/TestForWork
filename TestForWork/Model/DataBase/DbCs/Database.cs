@@ -84,7 +84,8 @@ namespace TestForWork.Model.DataBase.DbCs
                     "CreateTablePostProcedure.sql",
                     "CreateTableStatusProcedure.sql",
                     "ListEmployess.sql",
-                    "Statuses.sql"
+                    "Statuses.sql",
+                    "StatEmplyeesByData.sql"
                 };
                 string path;
                 foreach (var procedureFileName  in listprocedure)
